@@ -26,3 +26,12 @@ export async function findMovieById(req: Request, res: Response) {
     Logger.error(`Error finding movie: ${e.message}`);
   }
 }
+
+export async function getAllMovies(req: Request, res: Response) {
+  try {
+    const movies = await MovieModel.find();
+    return res.status(200).json(movies);
+  } catch (e: any) {
+    Logger.error(`Error finding movies: ${e.message}`);
+  }
+}
