@@ -4,6 +4,7 @@ import {
   findMovieById,
   getAllMovies,
   deleteMovie,
+  updateMovie,
 } from "./controllers/movieController";
 import { validate } from "./middlewares/handleValidation";
 import { movieCreatevalidation } from "./middlewares/movieValidation";
@@ -48,4 +49,18 @@ export default router
     } catch (error: any) {
       res;
     }
-  });
+  })
+  .patch(
+    "/movie/:id",
+    movieCreatevalidation(),
+    (req: Request, res: Response, next: NextFunction) => {
+      validate(req, res, next);
+    },
+    async (req: Request, res: Response) => {
+      try {
+        await updateMovie(req, res);
+      } catch (error: any) {
+        res;
+      }
+    }
+  );
