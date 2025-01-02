@@ -3,6 +3,7 @@ import {
   createMovie,
   findMovieById,
   getAllMovies,
+  deleteMovie,
 } from "./controllers/movieController";
 import { validate } from "./middlewares/handleValidation";
 import { movieCreatevalidation } from "./middlewares/movieValidation";
@@ -37,6 +38,13 @@ export default router
   .get("/movies", async (req: Request, res: Response) => {
     try {
       await getAllMovies(req, res);
+    } catch (error: any) {
+      res;
+    }
+  })
+  .delete("/movie/:id", async (req: Request, res: Response) => {
+    try {
+      await deleteMovie(req, res);
     } catch (error: any) {
       res;
     }
