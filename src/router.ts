@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { createMovie } from "./controllers/movieController";
+import { createMovie, findMovieById } from "./controllers/movieController";
 import { validate } from "./middlewares/handleValidation";
 import { movieCreatevalidation } from "./middlewares/movieValidation";
 
@@ -22,4 +22,11 @@ export default router
         res.status(500).send(error.message);
       }
     }
-  );
+  )
+  .get("/movie/:id", async (req: Request, res: Response) => {
+    try {
+      await findMovieById(req, res);
+    } catch (error: any) {
+      res.status(500).send(error.message);
+    }
+  });
